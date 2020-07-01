@@ -37,7 +37,7 @@
     "open": "^7.0.4",
     "rimraf": "2.5.4",
     "style-loader": "0.13.1",
-    "surge": "0.20.4",
+    "surge": "0.21.3",
     "webpack": "^4.43.0",
     "webpack-dev-middleware": "1.8.4",
     "webpack-hot-middleware": "2.13.0",
