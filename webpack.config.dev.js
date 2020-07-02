@@ -1,51 +1,31 @@
-import path from "path";
-import HtmlWebpackPlugin from "html-webpack-plugin";
-
-export default {
-  mode: "development",
-  entry: {
-    app: "./src/index.js",
-  },
-  target: "web",
-  devtool: "inline-source-map",
-  devServer: {
-    contentBase: "./src",
-  },
-  plugins: [
-    // Create HTML file that includes reference to bundled JS.
-    new HtmlWebpackPlugin({
-      template: "src/index.html",
-      inject: true,
-    }),
-  ],
-  output: {
-    path: path.resolve(__dirname, "src"),
-    publicPath: "/",
-    filename: "[name].bundle.js",
-  },
-};
+const path = require("path");
 
 module.exports = {
+  mode: "development",
+  entry: "./src/index.js",
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
+  },
+  devtool: "inline-source-map",
+  devServer: {
+    contentBase: "./dist",
+  },
+
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /(node_modules)/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env"],
-          },
-        },
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
       },
-
-      { test: /\.css$/i, loaders: ["style", "css"] },
       {
-        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
-        loader: "url-loader",
-        options: {
-          limit: 8192,
-        },
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ["file-loader"],
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: ["file-loader"],
       },
     ],
   },

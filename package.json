@@ -2,6 +2,7 @@
   "name": "javascript-development-environment",
   "version": "1.0.0",
   "description": "JavaScript development environment ",
+  "private": true,
   "scripts": {
     "prestart": "babel-node buildScript/startMessage.js",
     "start": "npm-run-all --parallel startServer",
@@ -13,6 +14,8 @@
   "license": "MIT",
   "dependencies": {
     "babel-preset-env": "^1.7.0",
+    "file-loader": "^6.0.0",
+    "lodash": "^4.17.15",
     "webpack-cli": "^3.3.12",
     "whatwg-fetch": "3.1.0"
   },
