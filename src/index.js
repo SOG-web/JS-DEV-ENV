@@ -8,8 +8,6 @@ function component() {
   // Lodash, now imported by this script
   element.innerHTML = _.join(["Hello", "webpack"], " ");
   element.classList.add("hello");
-  console.log("ghcgx");
-  debugger;
   // Add the image to our existing div.
   const myIcon = new Image();
   myIcon.src = logo;

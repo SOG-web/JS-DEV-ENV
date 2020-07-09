@@ -5,10 +5,14 @@
   "private": true,
   "scripts": {
     "prestart": "babel-node buildScript/startMessage.js",
-    "start": "npm-run-all --parallel startServer",
+    "start": "npm-run-all --parallel startServer lint:watch test:watch",
     "startServer": "babel-node buildScript/srcServer.js",
     "localtunnel": "lt --port 3000",
-    "share": "npm-run-all --parallel startServer localtunnel"
+    "share": "npm-run-all --parallel startServer localtunnel",
+    "lint": "esw webpack.config.* src buildScript --color",
+    "lint:watch": "npm run lint -- --watch",
+    "test": "mocha --reporter progress buildScript/testSetup.js \"src/**/*.test.js\"",
+    "test:watch": "npm run test -- --watch"
   },
   "author": "Olalekan Usman",
   "license": "MIT",
