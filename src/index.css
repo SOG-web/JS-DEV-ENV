@@ -1,4 +1,7 @@
-.hello {
-  color: red;
-  background: url("./logo.large.png");
+body {
+  font-family: Sans-Serif;
+}
+
+table th {
+  padding: 5px
 }

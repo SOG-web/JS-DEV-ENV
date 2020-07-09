@@ -1,19 +1,34 @@
-import _ from "lodash";
-import "./index.css";
-import logo from "./logo.large.png";
+import './index.css';
 
-function component() {
-  const element = document.createElement("div");
+import {getUsers, deleteUser} from './api/userApi';
 
-  // Lodash, now imported by this script
-  element.innerHTML = _.join(["Hello", "webpack"], " ");
-  element.classList.add("hello");
-  // Add the image to our existing div.
-  const myIcon = new Image();
-  myIcon.src = logo;
-  element.appendChild(myIcon);
+// Populate table of users via API call.
+getUsers().then(result => {
+  let usersBody = "";
 
-  return element;
-}
+  result.forEach(user => {
+    usersBody+= `<tr>
+      <td><a href="#" data-id="${user.id}" class="deleteUser">Delete</a></td>
+      <td>${user.id}</td>
+      <td>${user.firstName}</td>
+      <td>${user.lastName}</td>
+      <td>${user.email}</td>
+      </tr>`
+  });
 
-document.body.appendChild(component());
+  global.document.getElementById('users').innerHTML = usersBody;
+
+  const deleteLinks = global.document.getElementsByClassName('deleteUser');
+
+  // Must use array.from to create a real array from a DOM collection
+  // getElementsByClassname only returns an "array like" object
+  Array.from(deleteLinks, link => {
+    link.onclick = function(event) {
+      const element = event.target;
+      event.preventDefault();
+      deleteUser(element.attributes["data-id"].value);
+      const row = element.parentNode.parentNode;
+      row.parentNode.removeChild(row);
+    };
+  });
+});
